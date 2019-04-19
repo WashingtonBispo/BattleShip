@@ -1,10 +1,13 @@
 #include <iostream>
-#include <string>
-#include <fstream>
-
-using namespace std;
+#include "Layout_Jogo.cpp"
+#include "Utilidade.cpp"
+#include "Barco.hpp"
+#include "Submarino.hpp"
 
 int main(){
-
-    return 0;
+	int d;
+	Barco canoa1(1,2,'m');
+	d= canoa1.Toma_Dano(canoa1.get_vida());
+	cout << d;
+return 0;
 }
