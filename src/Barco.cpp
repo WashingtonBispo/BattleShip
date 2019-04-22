@@ -4,15 +4,24 @@
 using namespace std;
 
 Barco::Barco(int x, int y,char direcao){
+	set_nome('C');
 	set_x(x);
 	set_y(y);
 	set_direcao(direcao);
-	set_ID('C');
+	set_ID('N');
 	set_vida(1);
 	set_tamanho(1);
 
 }
-
+Barco::Barco(){
+	set_nome('C');
+	set_x(1);
+        set_y(1);
+        set_direcao('N');
+        set_ID('N');
+        set_vida(1);
+        set_tamanho(1);
+}
 
 Barco::~Barco(){
 }
@@ -64,11 +73,23 @@ int Barco::get_vida(){
 void Barco::set_vida(int vida){
 	this -> vida=vida;
 }
+
+char Barco::get_nome(){
+	return nome;
+}
+
+void Barco::set_nome(char nome){
+	this -> nome=nome;
+}
 		
-int Barco::Toma_Dano(int vida){
+int Barco::Tomar_Dano(int x, int y){
+	if(get_vida()==0){
+		cout << "Essa canoa ja foi abatida\n";
+		return 0;
+	}
 	cout << "CANOA DESTRUÍDA\n";
-	vida =get_vida()-1;
-	return vida;
+	set_vida(get_vida()-1);
+	return 1;
 }
 
 

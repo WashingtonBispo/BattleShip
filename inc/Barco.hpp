@@ -3,6 +3,7 @@
 
 class Barco{
 	private:
+		char nome;
 		int x;
 		int y;
 		char ID;
@@ -11,11 +12,15 @@ class Barco{
 		int vida;
 
 	public:
+		Barco();
 		Barco(int x,int y,char direcao);
 		~Barco();
 		
+		char get_nome();
+		void set_nome(char nome);
+
 		int get_x();
-		void set_x(int x);
+			void set_x(int x);
 
 		int get_y();
 		void set_y(int y);
@@ -32,8 +37,7 @@ class Barco{
 		int get_vida();
 		void set_vida(int vida);
 
-		int Toma_Dano(int vida);
-		
+		virtual int Tomar_Dano(int x,int y);
 };
 
 #endif

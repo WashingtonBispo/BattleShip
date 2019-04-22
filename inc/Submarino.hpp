@@ -11,12 +11,12 @@ class Submarino : public Barco {
 		string segmentos;
 	public:
 		Submarino(int x,int y,char direcao);
+		Submarino();
 		~Submarino();
 		
 		string get_segmentos();
 		void set_segmentos(string segmento);
 
-		int Poder(int vida);
-		int Toma_Dano(int vida);
+		int Tomar_Dano(int x,int y);
 };
 #endif

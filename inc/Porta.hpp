@@ -12,6 +12,7 @@ class Porta : public Barco {
 		int evasiva;
 	public:
 		Porta(int x,int y,char direcao);
+		Porta();
 		~Porta();
 		
 		string get_segmentos();
