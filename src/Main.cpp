@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-	int d;
+	system("clear");
 	Partida jogo;
 	Layout tela;
 	tela.grade();

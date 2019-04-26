@@ -37,10 +37,10 @@ Partida::Partida(){
 
 
 
-	int x,y,n=12;
+	int x,y;
         char l;
         string t,d;
-        ifstream map("map_1.txt");
+        ifstream map("doc//map_1.txt");
 				
         for(int z=0;z<12;){
                 l=map.peek();
@@ -111,9 +111,14 @@ void Partida::preencher(int z){
                 cout << "\u2551";
                 for(int y=0;y<13;y++)
                         cout << " " << get_m(x,y,z) <<  " \u2551";
-                cout << endl << endl;;
+                cout << x << endl << endl;;
 
                 }
+	cout << "  ";
+	for(int x=0;x<13;x++)
+		cout << char(65+x) << "   ";
+
+	cout << endl;
 }
 
 
@@ -122,16 +127,17 @@ void Partida::Configura_Barco(Barco atual,int z){
 	int x,y,tamanho;
 	char d,ID;
 	
-	if(d=='n'){
-		set_mi(ID,x,y,z);
-		return;
-	}
-
+		
 	x=atual.get_x();
 	y=atual.get_y();
 	d=atual.get_direcao();
 	ID=atual.get_ID();
 	tamanho=atual.get_tamanho();
+
+	if(d=='n'){
+                set_mi(ID,x,y,z);
+                return;
+        }
 
 	if(d=='c' || d=='e')
 		n=-1;
@@ -145,9 +151,12 @@ void Partida::Configura_Barco(Barco atual,int z){
 
 void Partida::Rodada(int j){
 	int x,y;
+	char yt;
 	char id;
 	preencher(j%2);
-	cin >> x >> y;
+	cin >> x >> yt;
+	yt=toupper(yt);
+	y=yt-65;
 	id=get_mi(x,y,j%2);
 	if(id=='-'){
 		cout << "Tiro na agua" << endl;

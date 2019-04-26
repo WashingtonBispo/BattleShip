@@ -1,7 +1,6 @@
 #ifndef PORTA_HPP
 #define PORTA_HPP
 
-#include "Barco.hpp"
 #include <string>
 
 using namespace std;
@@ -21,7 +20,7 @@ class Porta : public Barco {
 		int get_evasiva();
 		void set_evasiva(int evasiva);
 
-		int Toma_Dano(int evasiva);
+		int Tomar_Dano(int x, int y);
 };
 
 #endif

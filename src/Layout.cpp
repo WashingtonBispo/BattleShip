@@ -31,8 +31,9 @@ void Layout::grade(){
 
 	cout << "\u2554" << Linha();
 
-	for(int x=0;x<12;x++)
+	for(int x=0;x<12;x++){
 		cout << Abre_2 << Linha();
+	}
 		cout << Fecha_Diagonal << endl ;
 
 
@@ -42,8 +43,10 @@ void Layout::grade(){
 		for(int y=0;y<12;y++)
 			cout << Cruz << Linha();
 
-		cout << Fecha << endl;
-
+		cout << Fecha  << endl;
+		cout << "  "; 
+		for(int x=0;x<13;x++)
+			cout << x << "   ";
 	}
 
 	cout << endl << "\u255A" << Linha();

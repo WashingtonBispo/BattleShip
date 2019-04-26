@@ -1,8 +1,6 @@
 #ifndef PARTIDA_HPP
 #define PARTIDA_HPP
 #include "Barco.hpp"
-#include "Submarino.hpp"
-#include "Porta.hpp"
 #include <vector>
 using namespace std;
 

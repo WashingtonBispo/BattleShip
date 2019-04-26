@@ -1,8 +1,6 @@
 #ifndef SUBMARINO_HPP
 #define SUBMARINO_HPP
 
-#include "Barco.hpp"
-#include <string>
 
 using namespace std;
 
