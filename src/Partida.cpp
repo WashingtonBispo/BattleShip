@@ -23,8 +23,8 @@ Partida::Partida(){
 			
 
 	for(int x=0;x<6;x++){
-		jone.push_back(new Canoa);
 		jtwo.push_back(new Canoa);
+		jone.push_back(new Canoa);
 	}
 	for(int x=0;x<4;x++){
                 jone.push_back(new Submarino);
@@ -35,53 +35,7 @@ Partida::Partida(){
                 jtwo.push_back(new Porta);
 	}
 
-
-
-	int x,y;
-        char l;
-        string t,d;
-        ifstream map("doc//map_1.txt");
-				
-        for(int z=0;z<12;){
-                l=map.peek();
-
-               if(l=='#' or l=='\n'){
-                        map.ignore(256,'\n');
-                        continue;
-                }
-	
-               map >> x >> y >> t >> d;	
-               jone[z]->set_x(x);
-               jone[z]->set_y(y);
-               jone[z]->set_ID(65+z);
-               jone[z]->set_direcao(tolower(d[0]));
-               Configura_Barco(*jone[z],0);
-               z++;
-        }
-
-        for(int z=0;z<12;){
-                l=map.peek();
-
-                if(l=='#' or l=='\n'){
-                        map.ignore(256,'\n');
-                        continue;
-                }
-
-
-		
-
-                if(l==EOF)
-                        break;
-
-               map >> x >> y >> t >> d;
-               jtwo[z]->set_x(x);
-               jtwo[z]->set_y(y);
-               jtwo[z]->set_ID(65+z);
-               jtwo[z]->set_direcao(tolower(d[0]));
-                Configura_Barco(*jtwo[z],1);
-               z++;
-        }
-
+	Configura_Lista(jtwo,Configura_Lista(jone,0,1),0);
 }	
 
 Partida::~Partida(){
@@ -110,8 +64,8 @@ void Partida::preencher(int z){
         for(int x=0;x<13;x++){
                 cout << "\u2551";
                 for(int y=0;y<13;y++)
-                        cout << " " << get_m(x,y,z) <<  " \u2551";
-                cout << x << endl << endl;;
+                        cout << " " << get_mi(x,y,z) <<  " \u2551";
+                cout << x << endl << endl;
 
                 }
 	cout << "  ";
@@ -149,6 +103,33 @@ void Partida::Configura_Barco(Barco atual,int z){
                         set_mi(ID,x,y+(n*i),z);
 }
 
+int Partida::Configura_Lista(vector<Barco*>j,int a,int lugar){
+int x,y;
+        char l;
+        string t,d;
+ 	ifstream map("doc//map_1.txt");
+	map.seekg(a);
+        for(int z=0;z<12;){
+                l=map.peek();
+
+               if(l=='#' or l=='\n'){
+                        map.ignore(256,'\n');
+                        continue;
+                }
+	
+               map >> x >> y >> t >> d;	
+               j[z]->set_x(x);
+               j[z]->set_y(y);
+               j[z]->set_ID(65+z);
+               j[z]->set_direcao(tolower(d[0]));
+               Configura_Barco(*j[z],lugar);
+               z++;
+        }  	
+	int ola=map.tellg();
+	map.close();
+	return ola;
+}
+
 void Partida::Rodada(int j){
 	int x,y;
 	char yt;
@@ -174,5 +155,13 @@ void Partida::Rodada(int j){
         set_m(jone[id-65]->get_nome(),x,y,j%2);
 
 
+}
+
+vector<Barco*> Partida::get_jone(){
+	return jone;
+}
+
+vector<Barco*>Partida::get_jtwo(){
+	return jtwo;
 }
 	

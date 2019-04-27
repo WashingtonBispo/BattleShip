@@ -8,12 +8,11 @@ int main(){
 	Partida jogo;
 	Layout tela;
 	tela.grade();
-	jogo.preencher(0);
 	jogo.Rodada(0);
+	jogo.Rodada(1);
+	jogo.Rodada(1);
 	jogo.Rodada(0);
-	jogo.Rodada(0);
-	jogo.Rodada(0);
-	jogo.Rodada(0);
+	jogo.Rodada(1);
 	          
 return 0;
 }
