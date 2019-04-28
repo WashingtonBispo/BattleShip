@@ -11,10 +11,11 @@ class Layout{
 	
 		void gotoxy(int x,int y);
 		void grade();
-		void Faz_Retangulo(int x,int y);
+		void Faz_Retangulo(int x,int y,int x2,int y2);
 		string Linha();
+		void preencher();
 		int  menu();
-
+		
 };
 
 #endif

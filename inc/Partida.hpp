@@ -29,7 +29,9 @@ class Partida {
 
 		void Configura_Barco(Barco atual,int z);
 		int Configura_Lista(vector<Barco*> j,int a,int lugar);
-		void Rodada(int n);
+		int Rodada(int n);
+		void Jogo();
+		void Limpar();
 	};
 
 #endif

@@ -64,7 +64,7 @@ void Partida::preencher(int z){
         for(int x=0;x<13;x++){
                 cout << "\u2551";
                 for(int y=0;y<13;y++)
-                        cout << " " << get_mi(x,y,z) <<  " \u2551";
+                        cout << " " << get_m(x,y,z) <<  " \u2551";
                 cout << x << endl << endl;
 
                 }
@@ -130,31 +130,44 @@ int x,y;
 	return ola;
 }
 
-void Partida::Rodada(int j){
+int Partida::Rodada(int j){
 	int x,y;
 	char yt;
 	char id;
 	preencher(j%2);
-	cin >> x >> yt;
+	printf("%c[%d;%df",0x1B ,5,78);	
+	cin >> x;
+	printf("%c[%d;%df",0x1B ,8,79);
+	cin  >> yt;
 	yt=toupper(yt);
 	y=yt-65;
 	id=get_mi(x,y,j%2);
-	if(id=='-'){
-		cout << "Tiro na agua" << endl;
 
-		return;
+
+	if(id=='-'){
+		printf("%c[%d;%df",0x1B ,12,60);
+		cout << "TIRO NA AGUA" << endl;
+
+	if(j==1)
+        set_m('-',x,y,j%2);
+        else
+        set_m('-',x,y,j%2);
+
+		return 0;
 	}
-	if(j==1)
-	jtwo[id-65]->Tomar_Dano(x,y);
-	else
-	jone[id-65]->Tomar_Dano(x,y);
 	
-	if(j==1)
+	else if(j==1)
         set_m(jtwo[id-65]->get_nome(),x,y,j%2);
         else
-        set_m(jone[id-65]->get_nome(),x,y,j%2);
-
-
+        set_m(jone[id-65]->get_nome(),x,y,j%2);	
+	
+	preencher(j%2);	
+	printf("%c[%d;%df",0x1B ,12,60);	
+	
+	if(j==1)
+	return jtwo[id-65]->Tomar_Dano(x,y);
+	else
+	return jone[id-65]->Tomar_Dano(x,y);
 }
 
 vector<Barco*> Partida::get_jone(){
@@ -164,4 +177,40 @@ vector<Barco*> Partida::get_jone(){
 vector<Barco*>Partida::get_jtwo(){
 	return jtwo;
 }
+
+void Partida::Jogo(){
+        int vida[2]={24,24};
+        int jogada=0;
+	char whatever;
+        while(true){
+		Limpar();
+                vida[(jogada+1)%2]-=Rodada(jogada);
+                jogada++;
+                jogada%=2;
+		cout << vida[0] << " " << vida[1]<< endl;
+                if(vida[0]==0){
+                        cout << "JOGADOR 2 GANHOU!!!!!"<< endl;
+                        break;
+                }
+
+                if(vida[1]==0){
+                        cout <<"JOGADOR ! GANHOU !!!!!" << endl;
+                        break;
+                }
+		fflush(stdin);
+		scanf("%c",&whatever);
+       }
+}
+
+void Partida::Limpar(){
+	printf("%c[%d;%df",0x1B ,2,75);
+	cout << "                  ";
+	 printf("%c[%d;%df",0x1B ,5,78);
+	cout << "               ";
+	printf("%c[%d;%df",0x1B ,8,79);	
+	cout << "              ";
+	printf("%c[%d;%df",0x1B ,12,60);
+	cout << "                                 "; 
+}
+
 	
