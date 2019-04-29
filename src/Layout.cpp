@@ -62,7 +62,7 @@ void Layout::grade(){
 	Faz_Retangulo(33,2,59,10);
 	Faz_Retangulo(33,12,59,14);
 	
-	Faz_Retangulo(33,15,95,1);
+	Faz_Retangulo(33,16,95,1);
 	preencher();
 }
 
@@ -129,8 +129,30 @@ void Layout::preencher(){
         cout << "PODER - SUBMARINO";
         gotoxy(60,26);
         cout << "2 VIDAS POR SEGMENTO";
+
+	gotoxy(96,2);
+	cout << "JOGADOR 1";
 	
-return;
+	gotoxy(98,4);
+	cout << "PORTA-AVIAO(OES)"; 
+	gotoxy(98,6);
+	cout << "SUMBMARINO(S)";
+	gotoxy(98,8);
+	cout << "CANOA(S)";
+	
+	gotoxy(96,11);
+        cout << "JOGADOR 1";
+
+        gotoxy(98,13);
+        cout << "PORTA-AVIAO(OES)";
+        gotoxy(98,15);
+        cout << "SUMBMARINO(S)";
+        gotoxy(98,17);
+        cout << "CANOA(S)";
+
+
+
+	return;
 }
 
 int Layout::menu(){

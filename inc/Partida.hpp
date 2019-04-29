@@ -1,6 +1,7 @@
 #ifndef PARTIDA_HPP
 #define PARTIDA_HPP
 #include "Barco.hpp"
+#include "Jogador.hpp"
 #include <vector>
 using namespace std;
 
@@ -11,6 +12,8 @@ class Partida {
 			
 		vector <Barco*> jtwo;
 		vector <Barco*> jone;
+
+		Jogador jog[2];
 
 	public:
 		Partida();
@@ -28,7 +31,7 @@ class Partida {
 		void preencher(int z);
 
 		void Configura_Barco(Barco atual,int z);
-		int Configura_Lista(vector<Barco*> j,int a,int lugar);
+		int Configura_Lista(vector<Barco*> j,int a,int lugar,int opc);
 		int Rodada(int n);
 		void Jogo();
 		void Limpar();

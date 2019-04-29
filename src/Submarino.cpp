@@ -67,8 +67,9 @@ int Submarino::Tomar_Dano(int x,int y){
 	else if(get_vida()!=0 and pal[d]=='0')
 	cout << "Segmento do submarino derrubado\n";
 	
-	else
+	else{
 	cout << "Submarino DESTRUIDO\n";
-	
-	return 1;
+	return 2;
+		}
+return 0;
 }

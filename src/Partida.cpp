@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Jogador.hpp"
 #include "Partida.hpp"
 #include "Barco.hpp"
 #include "Submarino.hpp"
@@ -7,10 +8,19 @@
 #include "Canoa.hpp"
 #include <vector>
 #include <stdio.h>
+#include <time.h>
 
 using namespace std;
 
 Partida::Partida(){
+	string provisorio;
+	cin >> provisorio;
+	jog[0].set_nome(provisorio);
+	cin >> provisorio;
+	jog[1].set_nome(provisorio);
+		
+printf("%c[%d;%df",0x1B ,0,0);
+	
 	for(int z=0;z<2;z++)
 		for(int x=0;x<13;x++)
 			for(int y=0;y<13;y++)
@@ -34,8 +44,10 @@ Partida::Partida(){
                 jone.push_back(new Porta);
                 jtwo.push_back(new Porta);
 	}
-
-	Configura_Lista(jtwo,Configura_Lista(jone,0,1),0);
+	int c;
+	srand(time(0));
+	c=rand()%3+49;
+	Configura_Lista(jtwo,Configura_Lista(jone,0,1,c),0,c);
 }	
 
 Partida::~Partida(){
@@ -47,7 +59,7 @@ char Partida::get_m(int x,int y, int z){
 }
 
 void Partida::set_m(char l,int x,int y,int z){
-	this ->	m[x][y][z]=l;
+	m[x][y][z]=l;
 }
 
 char Partida::get_mi(int x,int y, int z){
@@ -55,7 +67,7 @@ char Partida::get_mi(int x,int y, int z){
 }
 
 void Partida::set_mi(char l,int x,int y,int z){
-	this ->mi[x][y][z]=l;
+	mi[x][y][z]=l;
 }
 
 void Partida::preencher(int z){
@@ -64,13 +76,29 @@ void Partida::preencher(int z){
         for(int x=0;x<13;x++){
                 cout << "\u2551";
                 for(int y=0;y<13;y++)
-                        cout << " " << get_m(x,y,z) <<  " \u2551";
+                        cout << " " << get_mi(x,y,z) <<  " \u2551";
                 cout << x << endl << endl;
 
                 }
 	cout << "  ";
 	for(int x=0;x<13;x++)
 		cout << char(65+x) << "   ";
+	
+	int y=1;
+	
+	for(int x=4;x<9;x+=2){
+		printf("%c[%d;%df",0x1B ,x,96);
+		cout << jog[0].get_vida(y);
+		
+		printf("%c[%d;%df",0x1B ,x+9,96);
+                cout << jog[1].get_vida(y);
+		y++;
+	}
+		
+		
+
+
+
 
 	cout << endl;
 }
@@ -103,11 +131,13 @@ void Partida::Configura_Barco(Barco atual,int z){
                         set_mi(ID,x,y+(n*i),z);
 }
 
-int Partida::Configura_Lista(vector<Barco*>j,int a,int lugar){
+int Partida::Configura_Lista(vector<Barco*>j,int a,int lugar,int c){
 int x,y;
         char l;
-        string t,d;
- 	ifstream map("doc//map_1.txt");
+        string t,d,mapa="doc//map_2.txt";
+	mapa[9]=char(c);
+	
+ 	ifstream map(mapa);
 	map.seekg(a);
         for(int z=0;z<12;){
                 l=map.peek();
@@ -179,22 +209,24 @@ vector<Barco*>Partida::get_jtwo(){
 }
 
 void Partida::Jogo(){
-        int vida[2]={24,24};
         int jogada=0;
+	int tipo;
 	char whatever;
         while(true){
 		Limpar();
-                vida[(jogada+1)%2]-=Rodada(jogada);
+		tipo=Rodada(jogada);
                 jogada++;
                 jogada%=2;
-		cout << vida[0] << " " << vida[1]<< endl;
-                if(vida[0]==0){
+		jog[jogada].set_vida(jog[jogada].get_vida(tipo)-1,tipo);
+		preencher((jogada+1)%2);
+		cin >> tipo;
+                if(jog[0].vida_total()==0){
                         cout << "JOGADOR 2 GANHOU!!!!!"<< endl;
                         break;
                 }
 
-                if(vida[1]==0){
-                        cout <<"JOGADOR ! GANHOU !!!!!" << endl;
+                if(jog[1].vida_total()==0){
+                        cout <<"JOGADOR 1 GANHOU !!!!!" << endl;
                         break;
                 }
 		fflush(stdin);

@@ -48,9 +48,9 @@ int Porta::Tomar_Dano(int x,int y){
 	if(rand()%4==0){
 	cout <<" PORTA-AVIOES INTERCEPTOU O TIRO" << endl;
 	return 0;
-	}
-	else
-{	
+	    }
+	else{
+	
 	int d;
         string pal;
         d = abs(get_x()+get_y()-y-x);
@@ -69,20 +69,16 @@ int Porta::Tomar_Dano(int x,int y){
         set_vida(get_vida()-1);
         pal[d]--;
         set_segmentos(pal);
-
-        if(get_vida()!=0 and pal[d]!='0')
-        cout  << "Porta-avioes Alvejado\n";
-
-        else if(get_vida()!=0 and pal[d]=='0')
+	
+        if(get_vida()!=0 and pal[d]=='0')
         cout << "Segmento do Porta-avioes derrubado\n";
 
-        else
+        else{
         cout << "Porta-avioes DESTRUIDO\n";
-
 	return 1;
+	}	
 
-}	
+return 0;
+}
 
-return 1;}
-
-
+}

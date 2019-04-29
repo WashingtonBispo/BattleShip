@@ -6,18 +6,19 @@ using namespace std;
 
 class Jogador{
         private:
-                int vida;
+                int vida[4];
                 string nome;
 
         public:
                 Jogador();
                 ~Jogador();
 
-                int get_vida();
-                void set_vida(int vida);
+                int get_vida(int pos);
+                void set_vida(int vida,int pos);
 
                 string get_nome();
                 void set_nome(string nome);
+		int vida_total();
 };
 
 #endif
