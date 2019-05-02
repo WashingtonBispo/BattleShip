@@ -9,6 +9,7 @@
 #include <vector>
 #include <stdio.h>
 #include <time.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -24,7 +25,7 @@ printf("%c[%d;%df",0x1B ,0,0);
 	for(int z=0;z<2;z++)
 		for(int x=0;x<13;x++)
 			for(int y=0;y<13;y++)
-				set_m('~',x,y,z);
+				set_m(' ',x,y,z);
 
 	for(int z=0;z<2;z++)
                 for(int x=0;x<13;x++)
@@ -48,7 +49,7 @@ printf("%c[%d;%df",0x1B ,0,0);
 	srand(time(0));
 	c=rand()%3+49;
 	Configura_Lista(jtwo,Configura_Lista(jone,0,1,c),0,c);
-}	
+	}	
 
 Partida::~Partida(){
 
@@ -76,7 +77,7 @@ void Partida::preencher(int z){
         for(int x=0;x<13;x++){
                 cout << "\u2551";
                 for(int y=0;y<13;y++)
-                        cout << " " << get_mi(x,y,z) <<  " \u2551";
+                        cout << " " << get_m(x,y,z) <<  " \u2551";
                 cout << x << endl << endl;
 
                 }
@@ -95,11 +96,9 @@ void Partida::preencher(int z){
 		y++;
 	}
 		
-		
-
-
-
-
+			
+	printf("%c[%d;%df",0x1B ,2,75);
+	cout << jog[z].get_nome();
 	cout << endl;
 }
 
@@ -162,15 +161,27 @@ int x,y;
 
 int Partida::Rodada(int j){
 	int x,y;
-	char yt;
-	char id;
-	preencher(j%2);
+	string entrada;
+	char id,yt;
+	
+inicio:
+	Limpar();
+	preencher(j);
+	
 	printf("%c[%d;%df",0x1B ,5,78);	
-	cin >> x;
+	cin >> entrada;
+	x=stoi(entrada);
 	printf("%c[%d;%df",0x1B ,8,79);
 	cin  >> yt;
+	
 	yt=toupper(yt);
 	y=yt-65;
+	
+	if(x>12 or x<0 or y>12 or y<0){
+	cout << "\a";
+	goto inicio;
+	}
+
 	id=get_mi(x,y,j%2);
 
 
@@ -185,19 +196,21 @@ int Partida::Rodada(int j){
 
 		return 0;
 	}
-	
+		
 	else if(j==1)
-        set_m(jtwo[id-65]->get_nome(),x,y,j%2);
+        set_m(jone[id-65]->get_nome(),x,y,j%2);
         else
-        set_m(jone[id-65]->get_nome(),x,y,j%2);	
+        set_m(jtwo[id-65]->get_nome(),x,y,j%2);	
 	
-	preencher(j%2);	
-	printf("%c[%d;%df",0x1B ,12,60);	
+	preencher(j);	
+	printf("%c[%d;%df",0x1B ,12,60);
 	
 	if(j==1)
-	return jtwo[id-65]->Tomar_Dano(x,y);
-	else
 	return jone[id-65]->Tomar_Dano(x,y);
+	else
+	return jtwo[id-65]->Tomar_Dano(x,y);
+
+	
 }
 
 vector<Barco*> Partida::get_jone(){
@@ -211,15 +224,14 @@ vector<Barco*>Partida::get_jtwo(){
 void Partida::Jogo(){
         int jogada=0;
 	int tipo;
-	char whatever;
-        while(true){
-		Limpar();
+	string pausa;
+	while(true){
 		tipo=Rodada(jogada);
                 jogada++;
                 jogada%=2;
 		jog[jogada].set_vida(jog[jogada].get_vida(tipo)-1,tipo);
 		preencher((jogada+1)%2);
-		cin >> tipo;
+
                 if(jog[0].vida_total()==0){
                         cout << "JOGADOR 2 GANHOU!!!!!"<< endl;
                         break;
@@ -229,8 +241,8 @@ void Partida::Jogo(){
                         cout <<"JOGADOR 1 GANHOU !!!!!" << endl;
                         break;
                 }
-		fflush(stdin);
-		scanf("%c",&whatever);
+		printf("%c[%d;%df",0x1B ,38,38);
+		system("sleep 3");
        }
 }
 

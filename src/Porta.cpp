@@ -46,7 +46,7 @@ void Porta::set_evasiva(int evasiva){
 int Porta::Tomar_Dano(int x,int y){
 	srand(time(0));
 	if(rand()%4==0){
-	cout <<" PORTA-AVIOES INTERCEPTOU O TIRO" << endl;
+	cout <<"PORTA-AVIOES INTERCEPTOU O TIRO" << endl;
 	return 0;
 	    }
 	else{
@@ -57,12 +57,12 @@ int Porta::Tomar_Dano(int x,int y){
         pal=get_segmentos();
 
         if(get_vida()==0){
-                cout << "Esse porta-avioes ja foi derrubado";
+                cout << "PORTA-AVIOES JA DESTRUIDO";
                 return 0;
         }
 
         if(pal[d]=='0'){
-                cout << "Esse setor ja eliminado, mas o porta-avioes ainda perdura\n";
+                cout << "SEGMENTO DO PORTA JA DESTRUIDO\n";
                 return 0;
         }
 
@@ -71,10 +71,10 @@ int Porta::Tomar_Dano(int x,int y){
         set_segmentos(pal);
 	
         if(get_vida()!=0 and pal[d]=='0')
-        cout << "Segmento do Porta-avioes derrubado\n";
+        cout << "SEGMENTO DO PORTA DESTRUIDO\n";
 
         else{
-        cout << "Porta-avioes DESTRUIDO\n";
+        cout << "PORTA-AVIOES DESTRUIDO\n";
 	return 1;
 	}	
 

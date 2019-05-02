@@ -141,7 +141,7 @@ void Layout::preencher(){
 	cout << "CANOA(S)";
 	
 	gotoxy(96,11);
-        cout << "JOGADOR 1";
+        cout << "JOGADOR 2";
 
         gotoxy(98,13);
         cout << "PORTA-AVIAO(OES)";

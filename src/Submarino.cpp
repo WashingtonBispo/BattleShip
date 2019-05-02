@@ -1,7 +1,5 @@
 #include "Submarino.hpp"
 #include "Barco.hpp"
-
-
 #include <iostream>
 #include <string>
 
@@ -44,31 +42,28 @@ void Submarino::set_segmentos(string segmentos){
 int Submarino::Tomar_Dano(int x,int y){
 	int d;
 	string pal;
-	d = abs(get_x()+get_y()-y-x);
+	d = abs((get_x()-x)+(get_y()-y));
 	pal=get_segmentos();
-	
 	if(get_vida()==0){
-		cout << "Esse submarino ja foi derrubado";
+		cout << "SUBMARINO JA DESTRUIDO";
 		return 0;
 	}
 
 	if(pal[d]=='0'){
-		cout << "Esse setor ja eliminado, mas o submarino ainda perdura\n";
+		cout << "SEGMENTO JA DESTRUIDO\n";
 		return 0;
 	}
-
 	set_vida(get_vida()-1);
-	pal[d]--;
+	pal[d]=pal[d]-1;
 	set_segmentos(pal);
-
 	if(get_vida()!=0 and pal[d]!='0')
-	cout  << "Submarino Alvejado\n";
+	cout  << "SUBMARINO ALVEJADO\n";
 
 	else if(get_vida()!=0 and pal[d]=='0')
-	cout << "Segmento do submarino derrubado\n";
+	cout << "SEGMENTO DE SUBMARINO DESTRUIDO\n";
 	
 	else{
-	cout << "Submarino DESTRUIDO\n";
+	cout << "SUBMARINO DESTRUIDO\n";
 	return 2;
 		}
 return 0;
