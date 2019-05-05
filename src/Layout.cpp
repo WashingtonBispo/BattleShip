@@ -106,7 +106,7 @@ void Layout::preencher(){
 	cout << "SIMBOLOS";
 	
 	gotoxy(60,16);
-	cout << "~ -> TERRENO DESCONHECIDO";
+	cout << "  -> TERRENO DESCONHECIDO";
 	
 	gotoxy(60,17);
 	cout << "- -> AGUA";
@@ -162,10 +162,9 @@ int Layout::menu(){
 	cout << "BATALHA" << endl << "        NAVAL"<<  "\n\n    MORRA  INSETO";
 	
 	gotoxy(5,11);
-        
-	cout << "--> Jogar\n";
-        cout << "        Comandos\n";
-        cout << "\n\n\n	KONAMI";
+       	 
+	cout << "(1) Jogar\n";
+        cout << "    (2) Sair\n";
 	
 	gotoxy(1,1);
 	

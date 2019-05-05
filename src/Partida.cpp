@@ -15,8 +15,10 @@ using namespace std;
 
 Partida::Partida(){
 	string provisorio;
+	cout << "Digite o nome do primeiro jogador:";
 	cin >> provisorio;
 	jog[0].set_nome(provisorio);
+	cout << "\nDigite o nome do segundo jogador:";
 	cin >> provisorio;
 	jog[1].set_nome(provisorio);
 		
@@ -233,11 +235,13 @@ void Partida::Jogo(){
 		preencher((jogada+1)%2);
 
                 if(jog[0].vida_total()==0){
+			system("clear");
                         cout << "JOGADOR 2 GANHOU!!!!!"<< endl;
                         break;
                 }
 
                 if(jog[1].vida_total()==0){
+			system("clear");
                         cout <<"JOGADOR 1 GANHOU !!!!!" << endl;
                         break;
                 }
